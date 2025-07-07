@@ -27,3 +27,9 @@ Then you should be good to go.
 ```bash
 pnpm dev
 ```
+
+## Running Linter and formatter
+```bash
+pnpm lint
+pnpm format
+```
