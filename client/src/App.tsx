@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import api from './api';
-
+// test comment to check if the file is being tracked by git
 function App() {
   useEffect(() => {
     api.get('/healthz')
