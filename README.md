@@ -33,3 +33,10 @@ pnpm dev
 pnpm lint
 pnpm format
 ```
+
+## Notes from Andrew Ng: Building Faster with AI (YC YouTube talk) https://www.youtube.com/watch?v=RNJCfif1dPY&ab_channel=YCombinator
+Conclusion: Building at Speed with Al
+• Concrete ideas buy you speed
+• Rapid engineering with Al coding assistance buys you speed
+• Rapid feedback buys you speed
+• Understanding AI technology buys you speed
