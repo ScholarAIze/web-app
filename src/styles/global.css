@@ -24,15 +24,22 @@
 }
 
 @layer components {
-  .reveal {
+  .anime-fade-up {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
+    transform: translateY(40px);
   }
 
-  .reveal.active {
-    opacity: 1;
-    transform: translateY(0);
+  .anime-fade-in {
+    opacity: 0;
+  }
+
+  .anime-scale {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  .anime-stagger > * {
+    opacity: 0;
   }
 
   .btn-primary {

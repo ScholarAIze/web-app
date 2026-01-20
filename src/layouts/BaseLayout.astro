@@ -22,6 +22,7 @@ const { title, description, image, type, noindex } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
     <style>
       html {
         font-family: 'Inter', system-ui, sans-serif;
@@ -35,16 +36,60 @@ const { title, description, image, type, noindex } = Astro.props;
     </main>
     <Footer />
 
-    <script>
+    <script is:inline>
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('active');
+            const el = entry.target;
+            const delay = parseInt(el.dataset.animeDelay || '0');
+            const duration = parseInt(el.dataset.animeDuration || '800');
+            const easing = el.dataset.animeEasing || 'easeOutExpo';
+
+            if (el.classList.contains('anime-fade-up')) {
+              anime({
+                targets: el,
+                opacity: [0, 1],
+                translateY: [40, 0],
+                duration: duration,
+                delay: delay,
+                easing: easing
+              });
+            } else if (el.classList.contains('anime-fade-in')) {
+              anime({
+                targets: el,
+                opacity: [0, 1],
+                duration: duration,
+                delay: delay,
+                easing: easing
+              });
+            } else if (el.classList.contains('anime-scale')) {
+              anime({
+                targets: el,
+                opacity: [0, 1],
+                scale: [0.9, 1],
+                duration: duration,
+                delay: delay,
+                easing: easing
+              });
+            } else if (el.classList.contains('anime-stagger')) {
+              anime({
+                targets: el.children,
+                opacity: [0, 1],
+                translateY: [30, 0],
+                duration: duration,
+                delay: anime.stagger(100, { start: delay }),
+                easing: easing
+              });
+            }
+
+            observer.unobserve(el);
           }
         });
-      }, { threshold: 0.1 });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      document.querySelectorAll('.anime-fade-up, .anime-fade-in, .anime-scale, .anime-stagger').forEach(el => {
+        observer.observe(el);
+      });
     </script>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
