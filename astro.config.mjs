@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://scholaraize.com',
+  site: 'https://scholaraize.github.io/web-app',
   compressHTML: true,
   trailingSlash: 'never',
   vite: {
