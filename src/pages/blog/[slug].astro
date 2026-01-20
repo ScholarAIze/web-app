@@ -23,9 +23,9 @@ const description = post.data.description;
 ---
 
 <BaseLayout title={title} description={description} type="article">
-  <section class="py-20 bg-white dark:bg-dark-bg">
+  <section class="py-20 bg-white">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <article class="prose prose-lg dark:prose-invert mx-auto">
+      <article class="prose prose-lg mx-auto">
         <header class="mb-8 not-prose">
           <div class="flex gap-2 mb-4">
             {post.data.tags.map((tag: string) => (
@@ -34,10 +34,10 @@ const description = post.data.description;
               </span>
             ))}
           </div>
-          <h1 class="text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white">
+          <h1 class="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
             {post.data.title}
           </h1>
-          <div class="flex items-center gap-4 text-slate-600 dark:text-slate-400">
+          <div class="flex items-center gap-4 text-slate-600">
             <span>{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
             <span>•</span>
             <span>{post.data.author}</span>
@@ -46,7 +46,7 @@ const description = post.data.description;
 
         <Content />
 
-        <footer class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700 not-prose">
+        <footer class="mt-12 pt-8 border-t border-slate-200 not-prose">
           <div class="flex flex-col sm:flex-row gap-4 justify-between items-center">
             <a href="/blog" class="text-primary hover:text-primary-light transition-colors">
               ← Back to Blog
