@@ -10,15 +10,17 @@ interface Props {
   image?: string;
   type?: 'website' | 'article';
   noindex?: boolean;
+  canonical?: string;
+  hideHeader?: boolean;
 }
 
-const { title, description, image, type, noindex } = Astro.props;
+const { title, description, image, type, noindex, canonical, hideHeader = false } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
   <head>
-    <SEO {title} {description} {image} {type} {noindex} />
+    <SEO {title} {description} {image} {type} {noindex} {canonical} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -29,11 +31,11 @@ const { title, description, image, type, noindex } = Astro.props;
     </style>
   </head>
   <body class="min-h-screen flex flex-col bg-white text-slate-900">
-    <Header />
-    <main class="flex-grow pt-16">
+    {!hideHeader && <Header />}
+    <main class:list={["flex-grow pt-16", { "pt-0": hideHeader }]}>
       <slot />
     </main>
-    <Footer />
+    {!hideHeader && <Footer />}
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script is:inline>

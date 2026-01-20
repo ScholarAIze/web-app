@@ -10,6 +10,7 @@ export default defineConfig({
   site: 'https://scholaraize.github.io/web-app',
   compressHTML: true,
   trailingSlash: 'never',
+  output: 'static',
   vite: {
     plugins: [tailwindcss()]
   },

@@ -1,7 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 const services = [
   {
@@ -33,79 +32,80 @@ const services = [
   }
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.3
-    }
-  }
-};
+function ScrollReveal({ children, delay = 0 }) {
+  const ref = useRef(null);
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.25, 0.46, 0.45, 0.94]
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
     }
-  }
-};
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className="scroll-reveal" style={{ transitionDelay: `${delay}ms` }}>
+      {children}
+    </div>
+  );
+}
 
 export default function AnimatedServices() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <motion.section
-      id="services"
-      className="py-24 bg-white"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      variants={containerVariants}
-    >
+    <section id="services" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div className="text-center mb-16" variants={itemVariants}>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-            Our Expertise
-          </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            We specialize in creating innovative AI solutions that bridge the gap between cutting-edge research and practical applications.
-          </p>
-        </motion.div>
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+              Our Expertise
+            </h2>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+              We specialize in creating innovative AI solutions that bridge the gap between cutting-edge research and practical applications.
+            </p>
+          </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              className="relative group"
-            >
-              <div className={`
-                absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl transform
-                transition-all duration-500 ease-out
-                ${hoveredIndex === index ? 'scale-105 opacity-100' : 'scale-100 opacity-0'}
-              `} />
-              <div className="relative bg-white rounded-2xl shadow-lg p-8 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-slate-100">
+            <ScrollReveal key={index} delay={index * 100}>
+              <div
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                className="relative group"
+              >
                 <div className={`
-                  w-16 h-16 rounded-xl flex items-center justify-center mb-6 transition-all duration-300
-                  ${hoveredIndex === index ? 'bg-primary text-white' : 'bg-primary/10 text-primary'}
-                `}>
-                  {service.icon}
+                  absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl transform
+                  transition-all duration-500 ease-out
+                  ${hoveredIndex === index ? 'scale-105 opacity-100' : 'scale-100 opacity-0'}
+                `} />
+                <div className="relative bg-white rounded-2xl shadow-lg p-8 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-slate-100">
+                  <div className={`
+                    w-16 h-16 rounded-xl flex items-center justify-center mb-6 transition-all duration-300
+                    ${hoveredIndex === index ? 'bg-primary text-white' : 'bg-primary/10 text-primary'}
+                  `}>
+                    {service.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-4">{service.title}</h3>
+                  <p className="text-slate-600 leading-relaxed">{service.description}</p>
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-4">{service.title}</h3>
-                <p className="text-slate-600 leading-relaxed">{service.description}</p>
               </div>
-            </motion.div>
+            </ScrollReveal>
           ))}
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }
