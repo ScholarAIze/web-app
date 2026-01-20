@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = "Projects - Scholaraize";
+const description = "Explore our AI-powered research tools and projects designed for scholars.";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="py-20 bg-white dark:bg-dark-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white">
+          Our Projects
+        </h1>
+        <p class="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+          Real-world applications of AI solving complex biological and research challenges.
+        </p>
+      </div>
+
+      <div class="max-w-4xl mx-auto">
+        <div class="card mb-8">
+          <div class="flex flex-col md:flex-row gap-8">
+            <div class="md:w-1/2">
+              <div class="aspect-video bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
+                <span class="text-6xl">🧬</span>
+              </div>
+            </div>
+            <div class="md:w-1/2">
+              <h2 class="text-2xl font-bold mb-3 text-slate-900 dark:text-white">BacTermFinder</h2>
+              <p class="text-slate-600 dark:text-slate-400 mb-4">
+                A comprehensive ensemble of Convolutional Neural Networks for identifying both intrinsic and factor-dependent transcription terminators in bacterial genomes.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">Deep Learning</span>
+                <span class="px-3 py-1 bg-secondary/10 text-secondary rounded-full text-sm">Bioinformatics</span>
+                <span class="px-3 py-1 bg-accent/10 text-accent rounded-full text-sm">CNN Ensemble</span>
+              </div>
+              <div class="flex flex-wrap gap-4">
+                <a href="/projects/bactermfinder" class="btn-primary">
+                  Learn More
+                </a>
+                <a href="/projects/bactermfinder/app" class="btn-secondary">
+                  Open App
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import Projects from '../components/Projects.astro';
+import Contact from '../components/Contact.astro';
+
+const title = "Scholaraize - AI Applications for Scholars | Innovation in Research Tools";
+const description = "We develop innovative AI applications for scholars. User-friendly tools with offline processing. Transform your research into accessible solutions.";
+---
+
+<BaseLayout title={title} description={description}>
+  <Hero />
+  <Services />
+  <Projects />
+  <Contact />
+</BaseLayout>

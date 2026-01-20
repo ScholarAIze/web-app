@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+const title = "Blog - Scholaraize";
+const description = "Insights and updates from the Scholaraize team on AI research and tools.";
+
+const posts = (await getCollection('blog', ({ data }) => {
+  return !data.draft;
+})).sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="py-20 bg-white dark:bg-dark-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white">
+          Blog
+        </h1>
+        <p class="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+          Insights and updates on AI research, tool development, and academic innovation.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {posts.map((post: CollectionEntry<'blog'>) => (
+          <article class="card">
+            <div class="mb-4">
+              <div class="flex gap-2 mb-3">
+                {post.data.tags.map((tag: string) => (
+                  <span class="px-2 py-1 bg-primary/10 text-primary rounded text-xs">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <a href={`/blog/${post.slug}`}>
+                <h2 class="text-xl font-bold mb-2 text-slate-900 dark:text-white hover:text-primary transition-colors">
+                  {post.data.title}
+                </h2>
+              </a>
+              <p class="text-slate-600 dark:text-slate-400 text-sm line-clamp-3">
+                {post.data.description}
+              </p>
+            </div>
+            <div class="flex items-center justify-between text-sm text-slate-500">
+              <span>{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+              <span>{post.data.author}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

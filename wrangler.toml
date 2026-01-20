@@ -1,0 +1,7 @@
+name = "scholaraize-proxy"
+main = "worker.js"
+compatibility_date = "2025-01-20"
+
+[vars]
+VERCEL_APP = "bactermfinder-tfjs.vercel.app"
+PROXY_PATH = "/projects/bactermfinder/app"

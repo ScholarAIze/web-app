@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post: CollectionEntry<'blog'>) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const title = `${post.data.title} - Scholaraize`;
+const description = post.data.description;
+---
+
+<BaseLayout title={title} description={description} type="article">
+  <section class="py-20 bg-white dark:bg-dark-bg">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <article class="prose prose-lg dark:prose-invert mx-auto">
+        <header class="mb-8 not-prose">
+          <div class="flex gap-2 mb-4">
+            {post.data.tags.map((tag: string) => (
+              <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
+                {tag}
+              </span>
+            ))}
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white">
+            {post.data.title}
+          </h1>
+          <div class="flex items-center gap-4 text-slate-600 dark:text-slate-400">
+            <span>{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+            <span>•</span>
+            <span>{post.data.author}</span>
+          </div>
+        </header>
+
+        <Content />
+
+        <footer class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-700 not-prose">
+          <div class="flex flex-col sm:flex-row gap-4 justify-between items-center">
+            <a href="/blog" class="text-primary hover:text-primary-light transition-colors">
+              ← Back to Blog
+            </a>
+            <div class="flex gap-4">
+              <a href="https://twitter.com/intent/tweet?text=" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-primary transition-colors">
+                Share on Twitter
+              </a>
+              <a href="https://www.linkedin.com/sharing/share-offsite/?url=" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-primary transition-colors">
+                Share on LinkedIn
+              </a>
+            </div>
+          </div>
+        </footer>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

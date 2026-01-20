@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = "About - Scholaraize";
+const description = "Learn about Scholaraize - our mission to bring innovative AI applications to scholars worldwide.";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="py-20 bg-white dark:bg-dark-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-8 text-slate-900 dark:text-white text-center">
+          About Scholaraize
+        </h1>
+
+        <div class="prose prose-lg dark:prose-invert mx-auto">
+          <p class="text-lg text-slate-600 dark:text-slate-400 mb-6">
+            Scholaraize was founded with a clear mission: to bridge the gap between cutting-edge AI research and practical tools that scholars can actually use.
+          </p>
+
+          <h2 class="text-2xl font-bold mb-4 text-slate-900 dark:text-white">Our Vision</h2>
+          <p class="text-slate-600 dark:text-slate-400 mb-6">
+            We believe that the best research should be accessible to everyone. Our team works to transform complex machine learning models into user-friendly applications that don't require technical expertise to use.
+          </p>
+
+          <h2 class="text-2xl font-bold mb-4 text-slate-900 dark:text-white">Innovation & Accessibility</h2>
+          <p class="text-slate-600 dark:text-slate-400 mb-6">
+            Every tool we create is designed with accessibility in mind. From intuitive interfaces to offline processing capabilities, we ensure that our applications work wherever researchers need them.
+          </p>
+
+          <h2 class="text-2xl font-bold mb-4 text-slate-900 dark:text-white">Our Approach</h2>
+          <ul class="list-disc list-inside text-slate-600 dark:text-slate-400 mb-6 space-y-2">
+            <li>Build AI tools that solve real research problems</li>
+            <li>Create intuitive, accessible interfaces</li>
+            <li>Prioritize data privacy with client-side processing</li>
+            <li>Support diverse research domains</li>
+            <li>Make our tools freely available</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
