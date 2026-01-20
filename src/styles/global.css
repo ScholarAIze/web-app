@@ -5,8 +5,8 @@
   --color-primary-light: #3B82F6;
   --color-secondary: #0D9488;
   --color-accent: #F59E0B;
-  --color-dark-bg: #0F172A;
-  --color-light-bg: #F8FAFC;
+  --color-science-teal: #0D9488;
+  --font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 @layer base {
@@ -14,12 +14,8 @@
     scroll-behavior: smooth;
   }
 
-  html.dark {
-    color-scheme: dark;
-  }
-
   body {
-    @apply bg-light-bg text-slate-900 dark:bg-dark-bg dark:text-slate-100 transition-colors duration-300;
+    @apply bg-white text-slate-900;
   }
 }
 
@@ -51,20 +47,85 @@
   }
 
   .card {
-    @apply bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1;
+    @apply bg-white rounded-xl shadow-lg p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1;
   }
 
   .section-title {
-    @apply text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white;
+    @apply text-3xl md:text-4xl font-bold mb-4 text-slate-900;
   }
 
   .section-subtitle {
-    @apply text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto;
+    @apply text-lg text-slate-600 max-w-2xl mx-auto;
   }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  @keyframes heroFadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes sectionReveal {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes cardHover {
+    from { transform: translateY(0); }
+    to { transform: translateY(-8px); }
+  }
+
+  @keyframes buttonPress {
+    from { transform: scale(1); }
+    to { transform: scale(0.95); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .animate-hero-fade-in {
+    animation: heroFadeIn 0.8s ease-out forwards;
+  }
+
+  .animate-section-reveal {
+    animation: sectionReveal 0.6s ease-out forwards;
+  }
+
+  .animate-card-hover {
+    transition: transform 0.3s ease;
+  }
+
+  .animate-card-hover:hover {
+    animation: cardHover 0.3s ease forwards;
+  }
+
+  .animate-button-press:active {
+    animation: buttonPress 0.15s ease forwards;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+  }
+
+  .scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
